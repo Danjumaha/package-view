@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GlobalTrack | Package Tracking Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="fedex.jpg" alt="FedEx" class="sidebar-logo">
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#home" class="nav-item active"><i class="fas fa-home"></i> Home</a>
+            <a href="#services" class="nav-item"><i class="fas fa-box"></i> Services</a>
+            <a href="#faq" class="nav-item"><i class="fas fa-question-circle"></i> Support</a>
+            <a href="admin.html" class="nav-item admin-link"><i class="fas fa-cog"></i> Fedex Control</a>
+        </nav>
+        <div class="sidebar-footer">
+            <p>&copy; 2026 FedEx</p>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+
+
+<header class="site-header">
+    <div class="header-container">
+        <h1 class="generic-logo">PACKAGE - TRACK</h1>
+        <div class="header-tagline">
+            <span>Package Tracking Portal</span>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        
+        <section class="hero-section" id="home">
+            <div class="hero-content">
+                <h2>TRACK YOUR SHIPMENT</h2>
+                <p>Enter your tracking number below for real-time location updates and delivery proof.</p>
+                <div class="tracking-box">
+                    <input type="text" id="track-input" placeholder="Enter Tracking ID (e.g. FDX-1234)">
+                    <button id="track-btn"><span>TRACK</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="tracking-result" class="tracking-result-section" style="display: none;">
+            <div class="result-header">
+                <div>
+                    <h3 id="tracking-number-display">ID: ---</h3>                    <p class="status-label">Package Current Status</p>
+                </div>
+                <div id="status-badge" class="status-badge">---</div>
+            </div>
+
+            <div class="sender-receiver-grid">
+                <div class="info-card">
+                    <h4><i class="fas fa-user"></i> Sender</h4>
+                    <p id="sender-name">---</p>
+                    <p id="sender-address" class="secondary-text">---</p>
+                </div>
+                <div class="info-card">
+                    <h4><i class="fas fa-user"></i> Receiver</h4>
+                    <p id="receiver-name">---</p>
+                    <p id="receiver-address" class="secondary-text">---</p>
+                </div>
+            </div>
+
+            <div class="details-grid">
+                <div class="detail-item">
+                    <h4><i class="fas fa-box"></i> Content</h4>
+                    <p id="package-type">---</p>
+                </div>
+                <div class="detail-item">
+                    <h4><i class="fas fa-weight-hanging"></i> Weight</h4>
+                    <p id="package-weight">---</p>
+                </div>
+                <div class="detail-item">
+                    <h4><i class="fas fa-dollar-sign"></i> Asset Value</h4>
+                    <p id="asset-value">---</p>
+                </div>
+                <div class="detail-item">
+                    <h4><i class="fas fa-percent"></i> Fee</h4>
+                    <p id="fee-value">---</p>
+                </div>
+                <div class="detail-item">
+                    <h4><i class="fas fa-calendar-check"></i> Delivery Date</h4>
+                    <p id="delivery-date">---</p>
+                </div>
+            </div>
+
+            <div class="tracking-details-grid">
+                <div class="timeline-section">
+                    <h4><i class="fas fa-history"></i> Tracking History</h4>
+                    <div id="timeline" class="timeline">
+                    </div>
+                </div>
+                <div class="map-section">
+                    <h4><i class="fas fa-map-marked-alt"></i> Real-Time Location</h4>
+                    <div id="map" class="google-map-container">                        <iframe id="google-map-iframe" src="" frameborder="0" style="border:0; width:100%; height:100%; border-radius:10px;" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="image-proof-section">
+                <h4><i class="fas fa-camera"></i> Delivery / Asset Proof</h4>
+                <div id="image-container" class="image-container" style="display: none;">
+                    <img id="package-image" src="" alt="Proof" class="package-image">
+                    <p class="image-hint">Click image to enlarge</p>
+                </div>
+                <p id="no-image-text" style="color: #999; text-align: center; padding: 20px;">No image available</p>
+            </div>
+        </section>
+
+        <!-- Image Modal -->
+        <div id="imageModal" class="modal">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <img class="modal-content" id="modalImage">
+        </div>
+
+        <section class="section-padding" id="services">
+            <div class="section-header">
+                <h2>Our Logistics Solutions</h2>
+                <p>The gold standard in global shipping.</p>
+            </div>
+            <div class="grid-container">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=500&q=80" alt="International Express">
+                    <div class="card-content">
+                        <h3>International Express</h3>
+                        <p>Fastest delivery to over 220 countries with full customs clearance.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=500&q=80" alt="Ground Heavy-Weight">
+                    <div class="card-content">
+                        <h3>Ground Heavy-Weight</h3>
+                        <p>Reliable door-to-door transport for large items and commercial goods.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=500&q=80" alt="Cold Chain Logistics">
+                    <div class="card-content">
+                        <h3>Cold Chain Logistics</h3>
+                        <p>Specialized temperature-controlled shipping for pharmaceuticals and perishables.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="why-us" class="why-us-section">
+            <div class="features-grid">
+                <div class="feature-item">
+
+
+
+
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Reliable & Secure</h3>
+                    <p>Your cargo is protected by 24/7 surveillance and smart locking systems.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-globe-americas"></i>
+                    <h3>Global Coverage</h3>
+                    <p>We operate in every major continent with local hubs in every key city.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-headset"></i>
+                    <h3>Expert Support</h3>
+                    <p>Our logistics managers are available 24/7 to solve shipping complexities.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding" id="faq">
+            <div class="faq-container-main">
+                <h2>Common Questions</h2>
+                <div class="faq-container">
+                    <details>
+                        <summary>How accurate is the live map?</summary>
+                        <p>The map updates every time our logistics team scans your package at a major hub or during local delivery.</p>
+                    </details>
+                    <details>
+                        <summary>What if my status says "Exception"?</summary>
+                        <p>An exception means a delay occurred (weather or customs). Please contact support for immediate assistance.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <img src="fedex.jpg" alt="FedEx" class="footer-logo">
+            <p>&copy; 2026 PACKAGE - TRACK Logistics Solutions. All rights reserved.</p>
+            <div class="social-links">
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
+            </div>
+
+
+
+
+
+        </footer>
+    </div>
+
+
+
+
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>    <script src="app.js"></script>
+
+</body>
+</html>

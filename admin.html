@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FedEx Command Center | Logistics Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="admin-body">
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="fedex.jpg" alt="FedEx" class="sidebar-logo">
+            <span class="sidebar-title">ADMIN</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-item"><i class="fas fa-home"></i> Back to Site</a>
+            <a href="#manifest" class="nav-item active"><i class="fas fa-plus-circle"></i> Add Shipment</a>
+            <a href="#database" class="nav-item"><i class="fas fa-database"></i> Database</a>
+        </nav>
+        <div class="sidebar-footer">
+            <button id="logout-btn" class="logout-btn-sidebar"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+    </div>
+
+    <!-- Login Screen -->
+    <div id="admin-login" class="admin-login-container">
+        <div class="login-card">
+            <img src="fedex.jpg" class="login-logo">
+            <h2>SYSTEM AUTHORIZATION</h2>
+            <p>Logistics Manager Access Only</p>
+            <input type="password" id="admin-pass" placeholder="Enter Security Key">
+            <button id="admin-login-btn">GRANT ACCESS</button>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="admin-panel" class="admin-panel" style="display: none;">
+        <div class="admin-header">
+            <h1><i class="fas fa-cog"></i> Command Center</h1>
+            <p>Manage shipments and tracking</p>
+        </div>
+
+        <main class="admin-container">
+            <div class="admin-grid-layout">
+                
+                <section class="admin-card" id="manifest">
+                    <div class="card-header">                        <h2 id="form-title"><i class="fas fa-plus-circle"></i> Shipment Manifest Editor</h2>
+                    </div>
+                    
+                    <div class="admin-form-grid">
+                        <div class="form-group">
+                            <label>Tracking ID (Leave blank to Auto-Generate)</label>
+                            <input type="text" id="edit-id" placeholder="Auto-ID: FDX-XXXX-XXXX">
+                        </div>
+                        <div class="form-group">
+                            <label>Current Shipment Status</label>
+                            <select id="status">
+                                <option value="Label Created">Label Created</option>
+                                <option value="Picked Up">Picked Up</option>
+                                <option value="In Transit">In Transit</option>
+                                <option value="Arrived at Hub">Arrived at Hub</option>
+                                <option value="Out for Delivery">Out for Delivery</option>
+                                <option value="Delivered">Delivered</option>
+                                <option value="Delayed/Hold">Delayed/Hold</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Sender Name *</label>
+                            <input type="text" id="sender-name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Sender Address *</label>
+                            <input type="text" id="sender-address" placeholder="City/Country">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Receiver Name *</label>
+                            <input type="text" id="receiver-name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Receiver Address *</label>
+                            <input type="text" id="receiver-address" placeholder="Destination Address">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Package Description</label>
+                            <input type="text" id="package-type" placeholder="e.g. iPhone 15 Pro Max">
+                        </div>
+                        <div class="form-group">
+                            <label>Weight & Specs</label>
+                            <input type="text" id="package-weight" placeholder="e.g. 5.5kg - 25x25x25cm">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Asset Value (Optional)</label>                            <input type="text" id="asset-value" placeholder="e.g. $1,500.00">
+                        </div>
+                        <div class="form-group">
+                            <label>Fee Percentage (Optional)</label>
+                            <input type="text" id="fee-value" placeholder="e.g. 5%">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Expected Delivery Date</label>
+                            <input type="datetime-local" id="delivery-date">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Add History Checkpoint</label>
+                            <input type="text" id="history-update" placeholder="e.g. Processed through London Facility">
+                        </div>
+                        <div class="form-group">
+                            <label>Map Coordinates (Lat, Lng)</label>
+                            <input type="text" id="current-coords" placeholder="51.5074, -0.1278">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Asset Proof (Package Image)</label>
+                            <input type="file" id="package-image-input" accept="image/*">
+                            <div id="upload-status" class="upload-status"></div>
+                            <div id="image-preview" class="image-preview"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button id="save-btn" class="btn-primary"><i class="fas fa-save"></i> PUBLISH SHIPMENT</button>
+                        <button id="clear-btn" class="btn-secondary" onclick="clearForm()"><i class="fas fa-redo"></i> RESET</button>
+                    </div>
+                </section>
+
+                <section class="admin-card" id="database">
+                    <div class="card-header">
+                        <h2><i class="fas fa-database"></i> Live Shipment Database</h2>
+                    </div>
+                    <div class="table-container">
+                        <table id="shipments-table">
+                            <thead>
+                                <tr>
+                                    <th>Tracking ID</th>
+                                    <th>Recipient</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="shipments-list">                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
